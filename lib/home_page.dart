@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/custom_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -83,60 +84,46 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.only(top: 20),
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 80,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        calculate("+");
-                      },
-                      child: Text("+"),
-                    ),
+                  const SizedBox(width: 80),
+                  CustomButton(
+                    text: "+",
+                    onPressed: () {
+                      calculate("+");
+                    },
                   ),
                   SizedBox(width: 12),
 
-                  SizedBox(
-                    width: 80,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        calculate("-");
-                      },
-                      child: Text("-"),
-                    ),
+                  const SizedBox(width: 80),
+                  CustomButton(
+                    text: "-",
+                    onPressed: () {
+                      calculate("-");
+                    },
                   ),
                   SizedBox(width: 12),
 
-                  SizedBox(
-                    width: 80,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        calculate("x");
-                      },
-                      child: Text("x"),
-                    ),
+                  const SizedBox(width: 80),
+                  CustomButton(
+                    text: "x",
+                    onPressed: () {
+                      calculate("x");
+                    },
                   ),
                   SizedBox(width: 12),
 
-                  SizedBox(
-                    width: 80,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        calculate(":");
-                      },
-                      child: Text(":"),
-                    ),
+                  const SizedBox(width: 80),
+                  CustomButton(
+                    text: ":",
+                    onPressed: () {
+                      calculate(":");
+                    },
                   ),
                 ],
               ),
             ),
 
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 20),
-                width: 160,
-                height: 50,
-                child: ElevatedButton(onPressed: clear, child: Text("Reset")),
-              ),
-            ),
+            const SizedBox(height: 20),
+            CustomButton(text: "Reset", onPressed: clear),
 
             Center(
               child: Container(

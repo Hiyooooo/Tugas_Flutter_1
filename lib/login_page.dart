@@ -1,6 +1,8 @@
 import 'package:calculator_app/home_page.dart';
 import 'package:calculator_app/register_page.dart';
 import 'package:flutter/material.dart';
+import 'widgets/custom_button.dart';
+import 'widgets/custom_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -64,42 +66,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            SizedBox(height: 20),
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                labelText: "Username",
-                hintText: "Enter your username",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(26),
-                ),
-              ),
-            ),
+            const SizedBox(height: 20),
+            CustomTextField(label: "Username", controller: usernameController),
 
-            SizedBox(height: 20),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Password",
-                hintText: "Enter your password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(26),
-                ),
-              ),
-            ),
+            const SizedBox(height: 20),
+            CustomTextField(label: "Password", controller: passwordController),
 
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 25),
-                width: 400,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: loginSystem,
-                  child: Text("Sign in"),
-                ),
-              ),
-            ),
+            CustomButton(text: "Sign in", onPressed: loginSystem),
 
             Center(
               child: Container(
