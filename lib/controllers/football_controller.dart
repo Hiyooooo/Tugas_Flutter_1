@@ -17,7 +17,7 @@ class FootballController extends GetxController {
     ),
     Player(
       image: "assets/images/neymarjr.jpg",
-      name: "Hotman",
+      name: "Neymar Jr",
       position: "LW",
       number: 3,
     ),

@@ -1,5 +1,5 @@
 import 'package:calculator_app/controllers/calculator_controller.dart';
-import 'package:calculator_app/routes/routes.dart';
+import 'package:calculator_app/controllers/nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:calculator_app/widgets/custom_textfield.dart';
@@ -11,11 +11,14 @@ class CalculatorPage extends StatelessWidget {
   final CalculatorController calculatorController = Get.put(
     CalculatorController(),
   );
+  final NavController nav = Get.put(NavController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
+    nav.setIndex(0);
+
     return Scaffold(
-      appBar: AppBar(title: Text("My Calculator")),
+      appBar: AppBar(title: const Text("My Calculator")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -37,19 +40,14 @@ class CalculatorPage extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     text: "+",
-                    onPressed: () {
-                      calculatorController.tambah();
-                    },
+                    onPressed: () => calculatorController.tambah(),
                   ),
                 ),
-
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
                     text: "-",
-                    onPressed: () {
-                      calculatorController.kurang();
-                    },
+                    onPressed: () => calculatorController.kurang(),
                   ),
                 ),
               ],
@@ -61,23 +59,19 @@ class CalculatorPage extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     text: "X",
-                    onPressed: () {
-                      calculatorController.kali();
-                    },
+                    onPressed: () => calculatorController.kali(),
                   ),
                 ),
-
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
                     text: "/",
-                    onPressed: () {
-                      calculatorController.bagi();
-                    },
+                    onPressed: () => calculatorController.bagi(),
                   ),
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
             Obx(
               () => Text(
@@ -89,19 +83,28 @@ class CalculatorPage extends StatelessWidget {
             const SizedBox(height: 20),
             CustomButton(
               text: "Clear",
-              onPressed: () {
-                calculatorController.clear();
-              },
-            ),
-
-            const SizedBox(height: 20),
-            CustomButton(
-              text: "Move To Football Players",
-              onPressed: () {
-                Get.toNamed(AppRoutes.footballplayers);
-              },
+              onPressed: () => calculatorController.clear(),
             ),
           ],
+        ),
+      ),
+
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          currentIndex: nav.currentIndex.value,
+          onTap: nav.onTap,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calculate),
+              label: 'Calculator',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.sports_soccer),
+              label: 'Football',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          ],
+          type: BottomNavigationBarType.fixed,
         ),
       ),
     );

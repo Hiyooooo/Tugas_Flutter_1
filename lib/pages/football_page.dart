@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:calculator_app/controllers/football_controller.dart';
+import 'package:calculator_app/controllers/nav_controller.dart';
 import 'package:calculator_app/models/player_model.dart';
 import 'package:calculator_app/routes/routes.dart';
 
 class FootballPages extends StatelessWidget {
   FootballPages({super.key});
+
   final FootballController footballController = Get.put(FootballController());
+  final NavController nav =
+      Get.find<NavController>(); // sudah di-put dari Calculator
 
   @override
   Widget build(BuildContext context) {
+    // Saat halaman Football tampil, set index ke 1
+    nav.setIndex(1);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Football Players')),
       body: Obx(() {
@@ -57,6 +64,25 @@ class FootballPages extends StatelessWidget {
           },
         );
       }),
+
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          currentIndex: nav.currentIndex.value,
+          onTap: nav.onTap,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calculate),
+              label: 'Calculator',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.sports_soccer),
+              label: 'Football',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          ],
+          type: BottomNavigationBarType.fixed,
+        ),
+      ),
     );
   }
 }
